@@ -13,6 +13,17 @@
 			const s = Snap('#vomitpallet');
 			
 			const nose = s.circle(150, 150, 100);
+			
+			const wurm = s.image('img/mimicwurm.jpg', 10, 10, 140, 140);
+			wurm.attr({id:'wurmy'});
+			wurm.click(e => {
+				//e is a MouseEvent (standard)
+				//e.target is what we clicked on
+				//e.target.id is wurmy
+				console.log('I clicked a wurm', e);
+			});
+			wurm.drag();
+			
 		}
 	</script>
 </head>
