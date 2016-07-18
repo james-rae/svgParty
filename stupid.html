@@ -1,15 +1,22 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <title>SVG Stupid Party</title>
 	
+	<!-- Hack Support for ES6 Modules -->
+	<script src="./lib/traceur.js"></script>
+	<script src="./lib/es6-module-loader-dev.js"></script>
+	
 	<!-- OH, SNAP! -->
 	<script src="./lib/snap.svg-min.js"></script>
 	
 	<script type="text/javascript">
+		
 		// lets get stupid
 		window.onload = function () {
+			
 			const s = Snap('#vomitpallet');
 			
 			const nose = s.circle(150, 150, 100);
@@ -24,20 +31,17 @@
 			});
 			wurm.drag();
 			
+			System.import('./js/testmod1.js').then(m1 => {
+				console.log('IMPORT TEST', m1, m1.m1());
+			});
+			
 		}
 	</script>
 </head>
 
 <body>
-
-
-
-	<svg id="vomitpallet" height="900" width="900" xmlns="http://www.w3.org/2000/svg">
-	
+	<svg id="vomitpallet" height="900" width="900" xmlns="http://www.w3.org/2000/svg">	
 	</svg>
-
-
-	
 </body>
 
 </html>
