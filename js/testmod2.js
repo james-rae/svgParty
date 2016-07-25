@@ -1,4 +1,4 @@
 
-export m2 = {
-        dog: "hog"
-    };
+export function m2 () {
+    return "hog";
+};

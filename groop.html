@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SVG Stupid Party Groop Test</title>
+	
+	<!-- Hack Support for ES6 Modules -->
+	<script src="./lib/traceur.js"></script>
+	<script src="./lib/es6-module-loader-dev.js"></script>
+	
+	<!-- OH, SNAP! -->
+	<script src="./lib/snap.svg-min.js"></script>
+	
+	<script type="text/javascript">
+		
+		// lets get stupid
+		window.onload = function () {
+			
+			// wild trickery to get any sort of custom drag handlers
+			// http://stackoverflow.com/questions/19559349/snap-svg-drag-event-handler
+			var move = function(dx,dy) {
+					this.attr({
+								transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [dx, dy]
+							});
+			}
+
+			var start = function() {
+					cardGroup.insertAfter(cardGroupx);
+					this.data('origTransform', this.transform().local );
+			}
+			var stop = function() {
+					console.log('finished dragging');
+			}
+
+			const s = Snap('#vomitpallet');
+			
+			const nose = s.circle(50, 50, 25);
+			const nose2 = s.circle(50, 70, 25);
+			
+			const dotsGroup = s.group(nose, nose2);
+
+			const wurm = s.image('img/mimicwurm.jpg', 10, 10, 140, 140);
+			wurm.attr({
+				id:'wurmy'
+			});
+			wurm.click(e => {
+				//e is a MouseEvent (standard)
+				//e.target is what we clicked on
+				//e.target.id is wurmy
+				console.log('I clicked a wurm', e);
+			});
+						
+			const cardGroup = s.group(wurm, dotsGroup); //
+			cardGroup.drag(move, start, stop); /* ()=>{}, ()=>{}, () => {
+				//on start
+				cardGroup.insertAfter(cardGroupx);
+			}); */
+			cardGroup.click(x => {
+				console.log('I clicked a card');
+			});
+
+
+
+			const nosex = s.circle(50, 50, 25);
+			const nose2x = s.circle(50, 70, 25);
+			
+			const dotsGroupx = s.group(nosex, nose2x);
+
+			const wurmx = s.image('img/mimicwurm.jpg', 20, 20, 180, 180);
+			wurmx.attr({
+				id:'wurmyx'
+			});
+			wurmx.click(e => {
+				//e is a MouseEvent (standard)
+				//e.target is what we clicked on
+				//e.target.id is wurmy
+				console.log('I clicked a wurmx', e);
+			});
+			
+			
+			const cardGroupx = s.group(wurmx, dotsGroupx);
+			cardGroupx.drag();
+			cardGroupx.click(x => {
+				console.log('I clicked a cardx');
+			});
+
+		}
+	</script>
+</head>
+
+<body>
+	<svg id="vomitpallet" height="900" width="900" xmlns="http://www.w3.org/2000/svg">	
+	</svg>
+</body>
+
+</html>
+
+
